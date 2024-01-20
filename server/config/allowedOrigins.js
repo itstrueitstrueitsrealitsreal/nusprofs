@@ -5,4 +5,4 @@ const allowedOrigins = [
     'http://www.ratemyprofnus.com'
 ]
 
-module.exports = allowedOrigins
+export default allowedOrigins;

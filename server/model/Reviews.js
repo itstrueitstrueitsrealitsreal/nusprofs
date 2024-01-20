@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
 const ReviewsSchema = new mongoose.Schema({
     quality: {
@@ -31,4 +31,6 @@ const ReviewsSchema = new mongoose.Schema({
     },
 })
 
-export default Reviews = mongoose.model('Reviews', ReviewsSchema)
+const Reviews = mongoose.model('Reviews', ReviewsSchema)
+
+export default Reviews

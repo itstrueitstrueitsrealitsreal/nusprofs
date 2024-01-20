@@ -1,27 +1,27 @@
-require('dotenv').config()
+import * as dotenv from 'dotenv'
+dotenv.config();
 // default settings
-const express = require('express')
+import express from "express"
 const app = express()
 const PORT = process.env.PORT || 3500
 app.use(express.json())
 console.log(process.env.NODE_ENV)
 // router
-const routes = require('./routes/routes')
-app.use('/api', routes)
+// const routes = require('./routes/routes')
+// app.use('/api', routes)
 // middleware
-const { logger, logEvents } = require('./middleware/logger')
-app.use(logger)
-const errorHandler = require('./middleware/errorHandler')
-app.use(errorHandler)
-const cookieParser = require('cookie-parser')
+// const { logger, logEvents } = require('./middleware/logger')
+// app.use(logger)
+// const errorHandler = require('./middleware/errorHandler')
+// app.use(errorHandler)
+import cookieParser from 'cookie-parser'
 app.use(cookieParser())
 // CORS
-const cors = require('cors')
-const corsOptions = require('./config/corsOptions')
-app.use(cors(corsOptions))
+import cors from 'cors'
+app.use(cors())
 // DB
-const connectDB = require('./config/dbConnection')
-const mongoose = require('mongoose')
+import connectDB from './config/dbConnection.js'
+import mongoose from "mongoose";
 connectDB()
 // listen to server and connect to MongoDB
 mongoose.connection.once('open', () => {
@@ -34,14 +34,13 @@ mongoose.connection.on('error', err => {
     logEvents(`${err.errno}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
 })
 
-// Create
-app.post('/post', (req, res) =>{
-    res.send("Post API")
-})
+import Professors from './model/Professors.js';
+import Reviews from './model/Reviews.js';
 
-// Professors
+/**
+ * API for Professors
+ */
 app.get('/professors', async (req, res) => {
-    // Logic to fetch list of all professors
     try {
         const professors = await Professors.find();
         if (professors) {
@@ -49,14 +48,36 @@ app.get('/professors', async (req, res) => {
         } else {
             res.status(404).json({ message: 'No professors found' })
         }
-    } catch (e) {
-        res.status(500).json({ message: e })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error })
     }
 })
 
-// Reviews
+app.post('/professors', async (req, res) => {
+    try {
+        const { name } = req.body;
+        const existingProfessor = await Professors.findOne({ name });
+        if (existingProfessor) {
+            return res.status(404).json({
+                message: `Professor ${name} exists in database`
+            });
+        }
+        const newProfessor = new Professors({ name });
+        await newProfessor.save()
+        return res.status(200).json({ 
+            message: `Professor ${name} added successfully` 
+        });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error })
+    }
+})
+
+/**
+ * API for Reviews
+ */
 app.get('/reviews', async (req, res) => {
-    // Logic to fetch list of all reviews
     try {
         const reviews = await Reviews.find();
         if (reviews) {
@@ -64,12 +85,15 @@ app.get('/reviews', async (req, res) => {
         } else {
             res.status(404).json({ message: 'No reviews found' })
         }
-    } catch (e) {
-        res.status(500).json({ message: e })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error })
     }
 })
 
-// Read
-app.get('/get', (req, res) => {
-    res.send("Get API")
+/**
+ * Check if API is working
+ */
+app.get('/', (req, res) => {
+    res.send("200 OK");
 })
