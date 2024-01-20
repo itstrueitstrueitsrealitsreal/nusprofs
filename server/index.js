@@ -91,6 +91,30 @@ app.get('/reviews', async (req, res) => {
     }
 })
 
+app.post('/reviews', async (req, res) => {
+    try {
+        const { quality, difficulty, course, profName, date, content } = req.body;
+        const newReview = new Reviews({ quality, difficulty, course, profName, date, content });
+        await newReview.save()
+        return res.status(200).json({ 
+            message: `Review added successfully` 
+        });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error })
+    }
+})
+
+app.delete('/reviews', async (req, res) => {
+    try {
+      await Reviews.deleteOne();
+      res.status(200).json({ message: 'Review deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 /**
  * Check if API is working
  */
