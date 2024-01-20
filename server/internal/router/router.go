@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
-	"github.com/itstrueitstrueitsrealitsreal/gossip-with-go-be/internal/routes"
+	"github.com/itstrueitstrueitsrealitsreal/nusprofs/server/internal/routes"
 )
 
 func Setup() *chi.Mux {
