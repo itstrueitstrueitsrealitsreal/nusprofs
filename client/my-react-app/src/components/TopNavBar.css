@@ -1,0 +1,52 @@
+/* components/TopNavbar.css */
+.top-nav {
+  display: flex;
+  background-color: white;
+  width: "100%"; /* Ensure full width */
+}
+
+.logo {
+  width: "100%";
+  justify-content: center;
+  align-items: center;
+
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  color: white;
+  /* background-color: white; */
+}
+
+input {
+  width: 800px; /* Set the width to your desired size */
+  height: 40px; /* Set the height to your desired size */
+  margin-right: 30px;
+  border: 1px solid #ddd; /* Optional: Add a border for visual clarity */
+  border-radius: 5px; 
+  background-color: white; /* Set the background color to white */
+  color: #333; 
+}
+
+.search-input {
+  width: 800px;
+  height: 40px;
+  margin-right: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  text-align: left; 
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+button {
+  background-color: #ff8c00; /* Set the background color to orange */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  width: 200px;
+  cursor: pointer;
+}
