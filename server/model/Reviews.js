@@ -9,10 +9,6 @@ const ReviewsSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    faculty: {
-        type: String,
-        required: true
-    },
     course: {
         type: String,
         required: true
