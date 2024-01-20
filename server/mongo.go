@@ -1,8 +1,7 @@
-package db
+package main
 
 import (
 	"context"
-	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -13,20 +12,21 @@ type dbwrapper struct {
 	db_client *mongo.Client
 }
 
-func (wrapped_client dbwrapper) connect_db() {
+func (wrapped_client dbwrapper) connect_mongo_db(ctx context.Context) error {
 	user := "" // add user here.
-	pw := "" // add pw here.
+	pw := ""   // add pw here.
 	URI := "mongodb+srv://" + user + ":" + pw + "@cluster-1.4uefyrz.mongodb.net/"
 	server := options.ServerAPI(options.ServerAPIVersion1)
 	opts := options.Client().ApplyURI(URI).SetServerAPIOptions(server)
-	client, err := mongo.Connect(context.TODO(), opts)
+	client, err := mongo.Connect(ctx, opts)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	var result bson.M
-	if err := client.Database("admin").RunCommand(context.TODO(),
+	if err := client.Database("admin").RunCommand(ctx,
 		bson.D{{"ping", 1}}).Decode(&result); err != nil {
-		log.Fatal(err)
+		return err
 	}
 	wrapped_client.db_client = client
+	return nil
 }
