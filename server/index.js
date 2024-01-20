@@ -33,3 +33,43 @@ mongoose.connection.on('error', err => {
     console.log(err)
     logEvents(`${err.errno}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
 })
+
+// Create
+app.post('/post', (req, res) =>{
+    res.send("Post API")
+})
+
+// Professors
+app.get('/professors', async (req, res) => {
+    // Logic to fetch list of all professors
+    try {
+        const professors = await Professors.find();
+        if (professors) {
+            res.status(200).json(professors)
+        } else {
+            res.status(404).json({ message: 'No professors found' })
+        }
+    } catch (e) {
+        res.status(500).json({ message: e })
+    }
+})
+
+// Reviews
+app.get('/reviews', async (req, res) => {
+    // Logic to fetch list of all reviews
+    try {
+        const reviews = await Reviews.find();
+        if (reviews) {
+            res.status(200).json(reviews)
+        } else {
+            res.status(404).json({ message: 'No reviews found' })
+        }
+    } catch (e) {
+        res.status(500).json({ message: e })
+    }
+})
+
+// Read
+app.get('/get', (req, res) => {
+    res.send("Get API")
+})

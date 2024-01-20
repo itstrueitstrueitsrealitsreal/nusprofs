@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 
-const schema = new mongoose.Schema({
-    name: {
-        type: String,
+const ReviewsSchema = new mongoose.Schema({
+    quality: {
+        type: Number,
+        required: true
+    },
+    difficulty: {
+        type: Number,
         required: true
     },
     faculty: {
@@ -12,5 +16,23 @@ const schema = new mongoose.Schema({
     course: {
         type: String,
         required: true
-    }
+    },
+    profName: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    },
+    helpfulness: {
+        type: Number,
+        required: true
+    },
 })
+
+export default Reviews = mongoose.model('Reviews', ReviewsSchema)
