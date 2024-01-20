@@ -95,15 +95,24 @@ app.post('/reviews', async (req, res) => {
     try {
         const { quality, difficulty, course, profName, date, content } = req.body;
         const newReview = new Reviews({ quality, difficulty, course, profName, date, content });
+        await Professors.updateOne(
+            { name: profName },
+            { $inc: { 
+                    totalReviews: 1,
+                    totalDifficulty: difficulty,
+                    totalQuality: quality
+                }
+            }
+        );
         await newReview.save()
         return res.status(200).json({ 
-            message: `Review added successfully` 
-        });
+            message: `Review added successfully`
+        }); 
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error })
     }
-})
+});
 
 app.delete('/reviews', async (req, res) => {
     try {
