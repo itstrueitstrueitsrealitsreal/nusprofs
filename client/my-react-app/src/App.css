@@ -1,14 +1,15 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
-
 body {
   background-color: white;
-  margin: 0; /* This removes default body margin */
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh; /* Optionally, set the height to 100% of the viewport height */
 }
 
 .logo {
@@ -46,6 +47,6 @@ body {
 .read-the-docs {
   color: #888;
 }
-.app-container {
-  background-color: white;
+.app-container p {
+  color: black; /* or any other color that contrasts with your white background */
 }

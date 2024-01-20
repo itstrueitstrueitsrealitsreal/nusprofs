@@ -19,11 +19,12 @@ function TopNavbar() {
         {/* </a> */}
       </div>
       <div className="search-bar">
-        <input
+      <input
           type="text"
-          placeholder="Search"
+          placeholder="Search Professor's Name"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input" // Add a class for styling the input
         />
         <button onClick={handleSearch}>Search</button>
       </div>
