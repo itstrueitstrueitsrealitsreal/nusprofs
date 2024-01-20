@@ -1,0 +1,83 @@
+.main {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainbox {
+    color : black;
+    display: flex;
+    flex-direction: column;
+}
+
+.maintitle {
+    font-size: larger;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 10%;
+}
+
+.fieldlabel {
+    margin-right: 5%;
+    font-weight: 500;
+    width: 40%;
+}
+
+.option {
+    width : 100%;
+}
+
+.suboption {
+    font-size: smaller;
+    font-weight: normal;
+}
+
+.nullsuboption {
+    font-size: smaller;
+    font-weight: lighter;
+}
+
+.emoji {
+    height: 40px;
+    width: 40px;
+    border: 0;
+    outline: none;
+}
+
+.emoji:focus {
+    height: 40px;
+    width: 40px;
+}
+
+
+.emoji:hover{
+    opacity: 50%;
+}
+
+.emojibox {
+    display: flex;
+}
+
+.entrybox {
+    display: flex;
+    margin-bottom: 5%;
+    flex-direction: column;
+}
+
+.option {
+    font-size: small;
+    font-weight: bold;
+}
+
+.button {
+    background-color: orange;
+    color: #004aad;
+}
+
+.button:hover {
+    background-color: white;
+    color: #004aad;
+    opacity: 50%;
+}
