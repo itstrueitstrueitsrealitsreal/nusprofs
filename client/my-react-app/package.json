@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^1.6.5",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-jsx": "^1.0.0",
