@@ -25,10 +25,10 @@ const ReviewsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    helpfulness: {
-        type: Number,
-        required: true
-    },
+    timeCreated: {
+        type: Date,
+        default: new Date(Date.now())
+    }
 })
 
 const Reviews = mongoose.model('Reviews', ReviewsSchema)
