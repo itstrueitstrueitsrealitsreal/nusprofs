@@ -46,7 +46,6 @@ button {
   background-color: #ff8c00; /* Set the background color to orange */
   color: white;
   border: none;
-  padding: 8px 12px;
-  width: 200px;
+  width: 22%;
   cursor: pointer;
 }
