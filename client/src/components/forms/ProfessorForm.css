@@ -73,6 +73,7 @@
 .button {
     background-color: orange;
     color: #004aad;
+    width: 100%;
 }
 
 .button:hover {

@@ -14,24 +14,22 @@ import gif_neutral from "../../assets/emojis/neutral.gif";
 import gif_happy from "../../assets/emojis/happy.gif";
 import gif_heart from "../../assets/emojis/heart.gif";
 
+import SubmitReview from "../../../scripts/SubmitReview";
+
 const validation_schema = Yup.object().shape({
     name : Yup.string().required(),
-    difficulty : Yup.number().required().max(10, "Value must be below 10").min(0, "Value must be above zero"),
-    quality : Yup.number().required().max(10, "Value must be below 10").min(0, "Value must be above zero"),
-    department : Yup.string().required(),
+    difficulty : Yup.number().required().max(5, "Value must be below 10").min(0, "Value must be above zero"),
+    quality : Yup.number().required().max(5, "Value must be below 10").min(0, "Value must be above zero"),
     mod : Yup.string().required(),
     comments : Yup.string(),
-    helpfulness : Yup.number().required().max(10, "Value must be below 10").min(0, "Value must be above zero"),
 });
 
 const initial_value = {
     name : "",
     difficulty : 0,
     quality : 0,
-    department : "",
     mod : "",
     comments : "",
-    helpfulness : 0,
 };
 
 export function ProfessorForm() {
@@ -46,12 +44,6 @@ export function ProfessorForm() {
     const [gif3q, setGif3q] = useState(false);
     const [gif4q, setGif4q] = useState(false);
     const [gif5q, setGif5q] = useState(false);
-
-    const [gif1h, setGif1h] = useState(false);
-    const [gif2h, setGif2h] = useState(false);
-    const [gif3h, setGif3h] = useState(false);
-    const [gif4h, setGif4h] = useState(false);
-    const [gif5h, setGif5h] = useState(false);
 
     const clearOthers = (n) => {
         const target = n-1;
@@ -88,7 +80,7 @@ export function ProfessorForm() {
                 validationSchema={validation_schema}
                 onSubmit={(values, { resetForm }) => {
                     console.log(values); 
-                    // TODO: Call backend to write to DB
+                    SubmitReview(values);
                     resetForm();
                 }}
             >
@@ -152,44 +144,6 @@ export function ProfessorForm() {
                                         setGif5q(true); clearOthersq(5);}}/>
                                 </div>
                                 <ErrorMessage name="quality" component="div"/>
-                            </div>
-                            <div className="entrybox">
-                                <label htmlFor="helpfulness"  className="fieldlabel">Helpfulness:</label>
-                                <div className="emojibox">
-                                    <input className="emoji" id="gif1" type="image" src={gif1h ? gif_crying : image_crying} 
-                                        alt="level_1" onClick={() => {
-                                            setFieldValue("helpfulness", 1);
-                                            setGif1h(true); clearOthersh(1);}}/>
-                                    <input className="emoji" id="gif2" type="image" src={gif2h ? gif_sad : image_sad} 
-                                        alt="level_2" onClick={() => {
-                                            setFieldValue("helpfulness", 2); 
-                                            setGif2h(true); clearOthersh(2);
-                                            }}/>
-                                    <input className="emoji" id="gif3" type="image" src={gif3h ? gif_neutral : image_neutral} 
-                                        alt="level_3" onClick={() => {setFieldValue("helpfulness", 3); 
-                                        setGif3h(true); clearOthersh(3);}}/>
-                                    <input className="emoji" id="gif4" type="image" src={gif4h ? gif_happy : image_happy} 
-                                        alt="level_4" onClick={() => {setFieldValue("helpfulness", 4); 
-                                        setGif4h(true); clearOthersh(4);}}/>
-                                    <input className="emoji" id="gif5" type="image" src={gif5h ? gif_heart : image_heart} 
-                                        alt="level_5" onClick={() => {setFieldValue("helpfulness", 5); 
-                                        setGif5h(true); clearOthersh(5);}}/>
-                                </div>
-                                <ErrorMessage name="helpfulness" component="div"/>
-                            </div>
-                            <div className="entrybox">
-                                <label htmlFor="department"  className="fieldlabel">Department:</label>
-                                <Field type="text" as="select" id="department" name="department" className="option">
-                                    <option value="" className="nullsuboption">Select a department</option>
-                                    <option value="Computing" className="suboption">School of Computing</option>
-                                    <option value="Engineering" className="suboption">School of Design & Engineering</option>
-                                    <option value="Law" className="suboption">Faculty of Law</option>
-                                    <option value="Science" className="suboption">Faculty of Science</option>
-                                    <option value="Dentistry" className="suboption">Faculty of Dentistry</option>
-                                    <option value="Business" className="suboption">NUS Business School</option>
-                                    <option value="Medicine" className="suboption">Yong Soo Lin School of Medicine</option>
-                                </Field>
-                                <ErrorMessage name="department" component="div"/>
                             </div>
                             <div className="entrybox">
                                 <label htmlFor="mod"  className="fieldlabel">Module:</label>
