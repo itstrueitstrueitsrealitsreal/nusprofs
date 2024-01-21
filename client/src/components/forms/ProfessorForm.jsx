@@ -105,21 +105,21 @@ export function ProfessorForm() {
                                 <div className="emojibox">
                                     <input className="emoji" id="gif1" type="image" src={gif1 ? gif_crying : image_crying} 
                                         alt="level_1" onClick={() => {
-                                            setFieldValue("difficulty", 1);
+                                            setFieldValue("difficulty", 5);
                                             setGif1(true); clearOthers(1);}}/>
                                     <input className="emoji" id="gif2" type="image" src={gif2 ? gif_sad : image_sad} 
                                         alt="level_2" onClick={() => {
-                                            setFieldValue("difficulty", 2); 
+                                            setFieldValue("difficulty", 4); 
                                             setGif2(true); clearOthers(2);
                                             }}/>
                                     <input className="emoji" id="gif3" type="image" src={gif3 ? gif_neutral : image_neutral} 
                                         alt="level_3" onClick={() => {setFieldValue("difficulty", 3); 
                                         setGif3(true); clearOthers(3);}}/>
                                     <input className="emoji" id="gif4" type="image" src={gif4 ? gif_happy : image_happy} 
-                                        alt="level_4" onClick={() => {setFieldValue("difficulty", 4); 
+                                        alt="level_4" onClick={() => {setFieldValue("difficulty", 2); 
                                         setGif4(true); clearOthers(4);}}/>
                                     <input className="emoji" id="gif5" type="image" src={gif5 ? gif_heart : image_heart} 
-                                        alt="level_5" onClick={() => {setFieldValue("difficulty", 5); 
+                                        alt="level_5" onClick={() => {setFieldValue("difficulty", 1); 
                                         setGif5(true); clearOthers(5);}}/>
                                 </div>
                                 <ErrorMessage name="difficulty" component="div"/>
