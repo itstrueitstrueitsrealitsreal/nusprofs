@@ -14,7 +14,28 @@ import gif_neutral from "../../assets/emojis/neutral.gif";
 import gif_happy from "../../assets/emojis/happy.gif";
 import gif_heart from "../../assets/emojis/heart.gif";
 
+import Modal from "react-modal";
+
 import SubmitReview from "../../../scripts/SubmitReview";
+
+const labelStyles = {
+    color: "black", // Set the label text color to black
+  };
+
+const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      width: "600px", // Increase the width
+      height: "350px", // Increase the height
+      padding: "20px",
+      color: "black", // Set the text color
+    },
+};
 
 const validation_schema = Yup.object().shape({
     name : Yup.string().required(),
@@ -44,6 +65,16 @@ export function ProfessorForm() {
     const [gif3q, setGif3q] = useState(false);
     const [gif4q, setGif4q] = useState(false);
     const [gif5q, setGif5q] = useState(false);
+
+    const [isAuthenticationOpen, setAuthenticationOpen] = useState(false);
+
+    const openAuthenticationPopup = () => {
+        setAuthenticationOpen(true);
+      };
+    
+      const closeAuthenticationPopup = () => {
+        setAuthenticationOpen(false);
+      };
 
     const clearOthers = (n) => {
         const target = n-1;
@@ -80,6 +111,7 @@ export function ProfessorForm() {
                 validationSchema={validation_schema}
                 onSubmit={(values, { resetForm }) => {
                     console.log(values); 
+                    openAuthenticationPopup();
                     SubmitReview(values);
                     resetForm();
                 }}
@@ -162,6 +194,53 @@ export function ProfessorForm() {
                     </Form>);
                 }}
             </Formik>
+            <Modal
+                isOpen={isAuthenticationOpen}
+                onRequestClose={closeAuthenticationPopup}
+                contentLabel="Authentication"
+                style={customStyles}
+            >
+                <h2 style={{ color: "black" }}>Authentication</h2>
+                <Formik
+                initialValues={{ name: "", email: "", nusNetID: "" }}
+                validationSchema={Yup.object().shape({
+                    name: Yup.string().required(),
+                    email: Yup.string().email().required(),
+                    nusNetID: Yup.string().required(),
+                })}
+                onSubmit={(values) => {
+                    console.log("Authentication values:", values);
+                    // Perform authentication logic here
+                    SubmitReview(initial_value); // You can call the SubmitReview function here
+                    resetForm(); // Reset form after successful authentication
+                    closeAuthenticationPopup(); // Close the authentication popup
+                }}
+                >
+                {({ isSubmitting, resetForm }) => (
+                    <Form>
+                    {/* Your authentication form */}
+                    <div>
+                        <label htmlFor="name" style={labelStyles}>Name:</label>
+                        <Field type="text" id="name" name="name" style={{ width: "600px"}}/>
+                        <ErrorMessage name="name" component="div" />
+                    </div>
+                    <div>
+                        <label htmlFor="email" style={labelStyles}>Email:</label>
+                        <Field type="email" id="email" name="email" style={{ width: "600px"}}/>
+                        <ErrorMessage name="email" component="div" />
+                    </div>
+                    <div>
+                        <label htmlFor="nusNetID" style={labelStyles}>NUS NetID:</label>
+                        <Field type="text" id="nusNetID" name="nusNetID" style={{ width: "600px", marginBottom: "10px"}} />
+                        <ErrorMessage name="nusNetID" component="div" />
+                    </div>
+                    <button type="submit" disabled={isSubmitting}>
+                        Authenticate
+                    </button>
+                    </Form>
+                )}
+                </Formik>
+            </Modal>
         </div>
     );
 }

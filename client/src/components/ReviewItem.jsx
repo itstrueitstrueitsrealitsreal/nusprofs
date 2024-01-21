@@ -1,23 +1,19 @@
 // ReviewItem.jsx
 import React from 'react';
 
-const date = "01/01/2024";
-const qualityTeaching = 4;
-const department = "School of Computing";
-const moduleCode = "CS2040";
-const acadYear = "AY23/24"
-const difficultyModule = 5;
-const comments = "Prof explained the concepts well!"
+const timePosted = "01/01/2024";
+const quality = 4;
+const module = "CS2040";
+const acadYear = "AY23/24";
+const content = "Prof explained the concepts well!"
 
 const ReviewItem = ({ review }) => {
   const {
-    date,
-    qualityTeaching,
-    department,
-    moduleCode,
-    acadYear,
-    difficultyModule,
-    comments,
+    module,
+    quality,
+    difficulty,
+    content,
+    timePosted,
   } = review;
 
   

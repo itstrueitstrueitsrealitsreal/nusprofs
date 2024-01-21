@@ -2,55 +2,74 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 import './TopNavbar.css'; // Import your CSS file for styling
-// import ProfessorSearch from './ProfessorSearch.js';
+
+const allProfessors = [
+  // Add your list of professors here
+  { id: 1, name: 'Professor A' },
+  { id: 2, name: 'Professor B' },
+  // ...
+];
 
 function TopNavbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+  const filterProfessors = (query) => {
+    const filteredProfessors = allProfessors.filter((professor) =>
+      professor.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setSuggestions(filteredProfessors);
+  };
+
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    filterProfessors(query);
+  };
 
   const handleSearch = () => {
     // Add logic for handling search here
     console.log('Searching for:', searchQuery);
   };
 
-  // useEffect(() => {
-  //   const fetchSuggestions = async () => {
-  //     const suggestions = await ProfessorService.getProfessorSuggestions(searchQuery);
-  //     setSuggestions(suggestions);
-  //   };
-
-  //   if (searchQuery.trim() !== '') {
-  //     fetchSuggestions();
-  //   } else {
-  //     setSuggestions([]);
-  //   }
-  // }, [searchQuery]);
-
   return (
+    // <div className="top-nav">
+    //   <div >
+    //     <img src={logo} className="logo" alt="App logo" />
+    //   </div>
+    //   <div className="search-bar">
+    //   <input
+    //       type="text"
+    //       placeholder="Search Professor's Name"
+    //       value={searchQuery}
+    //       onChange={(e) => setSearchQuery(e.target.value)}
+    //       className="search-input" 
+    //     />
+    //     <button onClick={handleSearch}>Search</button>
+    //   </div>
+    // </div>
     <div className="top-nav">
-      <div >
-        {/* <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer"> */}
+      <div>
         <img src={logo} className="logo" alt="App logo" />
-        {/* </a> */}
       </div>
       <div className="search-bar">
-      <input
+        <input
           type="text"
           placeholder="Search Professor's Name"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input" 
+          onChange={handleInputChange}
+          className="search-input"
         />
-        {/* <div className="suggestions-container">
-          {suggestions.map((professor) => (
-            <div key={professor.id} className="suggestion-item" onClick={() => setSearchQuery(professor.name)}>
-              {professor.name}
-            </div>
-          ))}
-        </div> */}
         <button onClick={handleSearch}>Search</button>
       </div>
-    </div>
+
+      {/* Display filtered suggestions */}
+      <div className="suggestions">
+        {suggestions.map((professor) => (
+          <div key={professor.name}>{professor.name}</div>
+        ))}
+      </div>
+  </div>
   );
 }
 
