@@ -1,0 +1,18 @@
+.review_main {
+    display: flex;
+    font-weight: bold;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding : 3%;
+    width: 400px;
+    font-size: xx-small;
+    color: #004aad;
+    border-radius: 25px;
+    box-shadow: 2px 2px 2px 1px grey;
+    margin-bottom: 3%;
+}
+
+.submit_party {
+    font-style: italic;
+    padding-right: 5%;
+}
