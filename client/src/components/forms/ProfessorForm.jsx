@@ -13,7 +13,6 @@ import gif_sad from "../../assets/emojis/sad.gif";
 import gif_neutral from "../../assets/emojis/neutral.gif";
 import gif_happy from "../../assets/emojis/happy.gif";
 import gif_heart from "../../assets/emojis/heart.gif";
-import { set } from "eth/core";
 
 const validation_schema = Yup.object().shape({
     name : Yup.string().required(),
