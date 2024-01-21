@@ -20,7 +20,6 @@ const validation_schema = Yup.object().shape({
     name : Yup.string().required(),
     difficulty : Yup.number().required().max(5, "Value must be below 10").min(0, "Value must be above zero"),
     quality : Yup.number().required().max(5, "Value must be below 10").min(0, "Value must be above zero"),
-    department : Yup.string().required(),
     mod : Yup.string().required(),
     comments : Yup.string(),
 });
@@ -29,10 +28,8 @@ const initial_value = {
     name : "",
     difficulty : 0,
     quality : 0,
-    department : "",
     mod : "",
     comments : "",
-    helpfulness : 0,
 };
 
 export function ProfessorForm() {
@@ -147,20 +144,6 @@ export function ProfessorForm() {
                                         setGif5q(true); clearOthersq(5);}}/>
                                 </div>
                                 <ErrorMessage name="quality" component="div"/>
-                            </div>
-                            <div className="entrybox">
-                                <label htmlFor="department"  className="fieldlabel">Department:</label>
-                                <Field type="text" as="select" id="department" name="department" className="option">
-                                    <option value="" className="nullsuboption">Select a department</option>
-                                    <option value="Computing" className="suboption">School of Computing</option>
-                                    <option value="Engineering" className="suboption">School of Design & Engineering</option>
-                                    <option value="Law" className="suboption">Faculty of Law</option>
-                                    <option value="Science" className="suboption">Faculty of Science</option>
-                                    <option value="Dentistry" className="suboption">Faculty of Dentistry</option>
-                                    <option value="Business" className="suboption">NUS Business School</option>
-                                    <option value="Medicine" className="suboption">Yong Soo Lin School of Medicine</option>
-                                </Field>
-                                <ErrorMessage name="department" component="div"/>
                             </div>
                             <div className="entrybox">
                                 <label htmlFor="mod"  className="fieldlabel">Module:</label>
